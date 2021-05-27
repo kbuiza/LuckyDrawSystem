@@ -7,19 +7,26 @@
 
                   <div class=" px-8 py-8 bg-white rounded-lg shadow-md bg-white">
                     <div class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
-                      <p class="font-semibold text-gray-800">Add new user</p>
+                      <p class="font-semibold text-gray-800">Add winning numbers</p>
                     </div>
+
+
+
+                    @if($errors->any())
+                        <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                          <p class="font-bold">There are some errors.</p>
+                          <ul>
+                              @foreach($errors->all() as $error)
+                                <li> {{ $error }} </li>
+                              @endforeach
+                          </ul>
+                        </div>                            
+                    @endif
 
                     <form method="POST" action="{{ route('users.store') }}">
                     	@csrf
                     	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 	                    <div class="flex flex-col px-6 py-5 bg-gray-50">
-	                      <div class="mb-4">
-	                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-	                          Name
-	                        </label>
-	                        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="Name">
-	                      </div>
 
 	                      <div class="grid grid-cols-2 gap-4">
 	                      	<div class="mb-4">

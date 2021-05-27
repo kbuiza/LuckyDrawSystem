@@ -13,7 +13,15 @@
                                 <div id="response-parent" hidden class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"  role="alert">
                                    <ul id="response" ></ul>
                                 </div>
-                           
+                           @if(isset($error1))
+                               <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                                 <p class="font-bold">There are some errors.</p>
+                                 <ul>
+                                       <li> {{ $error1 }} </li>
+                                 </ul>
+                               </div>                            
+                           @endif
+
                             @if($errors->any())
                                 <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
                                   <p class="font-bold">There are some errors.</p>

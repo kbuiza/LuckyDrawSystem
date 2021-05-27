@@ -94,13 +94,26 @@ class DrawController extends Controller
                 ]);
 
 
-                $winner_user = Person::where('winned', '=', '0')
-                    ->where('winning_number1', $request->winning_number)
+
+                $test_user = Person::where('winning_number1', $request->winning_number)
                     ->orWhere('winning_number2', $request->winning_number)
                     ->orWhere('winning_number3', $request->winning_number)
                     ->orWhere('winning_number4', $request->winning_number)
                     ->orWhere('winning_number5', $request->winning_number)
                     ->first();
+
+                if($test_user->winned == '0'){
+
+                    $winner_user = Person::where('winning_number1', $request->winning_number)
+                        ->orWhere('winning_number2', $request->winning_number)
+                        ->orWhere('winning_number3', $request->winning_number)
+                        ->orWhere('winning_number4', $request->winning_number)
+                        ->orWhere('winning_number5', $request->winning_number)
+                        ->first();
+                }
+                else{
+                    return redirect()->Route('draws.index')->with(['error1' => 'User already won.' ]);
+                }
               
 
                 
@@ -170,7 +183,10 @@ class DrawController extends Controller
 
         $draw->save();
 
-
+        // if(isset($winner_user)){
+        //     return redirect()->Route('draws.index')
+        //          ->with(['error1' => 'No more users available.' ]);
+        // }
         // return redirect()->Route('draws.index')
         //      ->with(['new_winner' => $new_winner, 'name' => $winner_user->name ]);
         return response()->json(['new_winner' => $new_winner, 'name' => $winner_user->name ]);

@@ -6,9 +6,21 @@
               <div class="inline-block">
                   <div class=" px-8 py-8 bg-white rounded-lg shadow-md bg-white">
 
+                    @if(!isset($u))
                       <div class="flex justify-start p-6">
                           <a href="{{ route('users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add New User</a>
                       </div>
+                    @endif
+                      @if($errors->any())
+                          <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                            <p class="font-bold">There are some errors.</p>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                  <li> {{ $error }} </li>
+                                @endforeach
+                            </ul>
+                          </div>                            
+                      @endif
                       <!-- This example requires Tailwind CSS v2.0+ -->
                       <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
