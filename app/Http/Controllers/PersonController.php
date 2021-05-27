@@ -42,10 +42,10 @@ class PersonController extends Controller
         $validatedData = $request->validate([
             // 'name' => 'required',
             'winning_number1' => 'required|unique:persons',
-            'winning_number2' => 'unique:persons',
-            'winning_number3' => 'unique:persons',
-            'winning_number4' => 'unique:persons',
-            'winning_number5' => 'unique:persons',
+            'winning_number2' => 'nullable|unique:persons',
+            'winning_number3' => 'nullable|unique:persons',
+            'winning_number4' => 'nullable|unique:persons',
+            'winning_number5' => 'nullable|unique:persons',
         ]);
         $w1 = Person::where('winning_number1', $request->winning_number1)
             ->orWhere('winning_number2', $request->winning_number1)
@@ -54,33 +54,46 @@ class PersonController extends Controller
             ->orWhere('winning_number5', $request->winning_number1)
             ->first();
 
-        $w2 = Person::where('winning_number1', $request->winning_number2)
-            ->orWhere('winning_number2', $request->winning_number2)
-            ->orWhere('winning_number3', $request->winning_number2)
-            ->orWhere('winning_number4', $request->winning_number2)
-            ->orWhere('winning_number5', $request->winning_number2)
-            ->first();
+        if($request->winning_number2 != null){
+            $w2 = Person::where('winning_number1', $request->winning_number2)
+                ->orWhere('winning_number2', $request->winning_number2)
+                ->orWhere('winning_number3', $request->winning_number2)
+                ->orWhere('winning_number4', $request->winning_number2)
+                ->orWhere('winning_number5', $request->winning_number2)
+                ->first();
+        }
 
-        $w3 = Person::where('winning_number1', $request->winning_number3)
-            ->orWhere('winning_number2', $request->winning_number3)
-            ->orWhere('winning_number3', $request->winning_number3)
-            ->orWhere('winning_number4', $request->winning_number3)
-            ->orWhere('winning_number5', $request->winning_number3)
-            ->first();
+        if($request->winning_number3 != null){
 
-        $w4 = Person::where('winning_number1', $request->winning_number4)
-            ->orWhere('winning_number2', $request->winning_number4)
-            ->orWhere('winning_number3', $request->winning_number4)
-            ->orWhere('winning_number4', $request->winning_number4)
-            ->orWhere('winning_number5', $request->winning_number4)
-            ->first();
+            $w3 = Person::where('winning_number1', $request->winning_number3)
+                ->orWhere('winning_number2', $request->winning_number3)
+                ->orWhere('winning_number3', $request->winning_number3)
+                ->orWhere('winning_number4', $request->winning_number3)
+                ->orWhere('winning_number5', $request->winning_number3)
+                ->first();
+        }
 
-        $w5 = Person::where('winning_number1', $request->winning_number5)
-            ->orWhere('winning_number2', $request->winning_number5)
-            ->orWhere('winning_number3', $request->winning_number5)
-            ->orWhere('winning_number4', $request->winning_number5)
-            ->orWhere('winning_number5', $request->winning_number5)
-            ->first();
+        if($request->winning_number4 != null){
+
+            $w4 = Person::where('winning_number1', $request->winning_number4)
+                ->orWhere('winning_number2', $request->winning_number4)
+                ->orWhere('winning_number3', $request->winning_number4)
+                ->orWhere('winning_number4', $request->winning_number4)
+                ->orWhere('winning_number5', $request->winning_number4)
+                ->first();
+        }
+
+        if($request->winning_number5 != null){
+
+          
+            $w5 = Person::where('winning_number1', $request->winning_number5)
+                ->orWhere('winning_number2', $request->winning_number5)
+                ->orWhere('winning_number3', $request->winning_number5)
+                ->orWhere('winning_number4', $request->winning_number5)
+                ->orWhere('winning_number5', $request->winning_number5)
+                ->first();
+        }
+
 
         if(isset($w1)){
 

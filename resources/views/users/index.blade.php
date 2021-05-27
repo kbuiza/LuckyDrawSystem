@@ -8,7 +8,7 @@
 
                     @if(!isset($u))
                       <div class="flex justify-start p-6">
-                          <a href="{{ route('users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add New User</a>
+                          <a href="{{ route('users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Winning Number</a>
                       </div>
                     @endif
                       @if($errors->any())
